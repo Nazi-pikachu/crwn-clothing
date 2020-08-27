@@ -18,19 +18,27 @@ class App extends React.Component {
 
   componentDidMount() {
     this.unSubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      //We will check if there is a user/user is signed in then we will store its data in the state
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot((snapshot) => {
-          this.setState({
-            currentUser: { id: snapshot.id, ...snapshot.data() },
-          });
+          this.setState(
+            {
+              currentUser: { id: snapshot.id, ...snapshot.data() },
+            },
+            () => {
+              return console.log(this.state);
+            }
+          );
         });
-        console.log(this.state);
-      } else {
-        this.setState({ currentUser: userAuth }, () => console.log(this.state));
+      }
+      //if there is no user/user is not signed in than we will be setting our state to the user which will be null by default
+      else {
+        this.setState({ currentUser: userAuth });
       }
     });
   }
+  // To prevent the memory leak we will have to remove the space used
   componentWillUnmount() {
     this.unSubscribeFromAuth();
     console.log("I am unmounted from the DOM ");

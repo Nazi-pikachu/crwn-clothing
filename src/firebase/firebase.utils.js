@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+// configuration settings for firebase
 const config = {
   apiKey: "AIzaSyCfIVmHFduPjmsuPv_vwtbdCfuvNSFHfuc",
   authDomain: "crwn-db-e461d.firebaseapp.com",
@@ -34,7 +35,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
       console.log("error creating user", error.message);
     }
   }
-  //we have passed the userRef for further user in App.js
+  //we have passed the userRef for further user in App.js to store the data of the user in the state of the app
   return userRef;
 };
 
