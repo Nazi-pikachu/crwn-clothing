@@ -31,10 +31,12 @@ class App extends React.Component {
             }
           );
         });
+        console.log("I am back part 2");
       }
       //if there is no user/user is not signed in than we will be setting our state to the user which will be null by default
       else {
         this.setState({ currentUser: userAuth });
+        console.log("I am back");
       }
     });
   }
@@ -49,8 +51,12 @@ class App extends React.Component {
       <div>
         <Header currentUser={this.state.currentUser}></Header>
         <Switch>
-          <Route exact={true} path="/" component={HomePage}></Route>
-          <Route path="/shop" component={ShopPage}></Route>
+          <Route
+            exact={true}
+            path="/crwn-clothing"
+            component={HomePage}
+          ></Route>
+          <Route path="/crwn-clothing/shop" component={ShopPage}></Route>
           <Route path="/sign" component={SignInAndSignUpPage}></Route>
         </Switch>
       </div>
